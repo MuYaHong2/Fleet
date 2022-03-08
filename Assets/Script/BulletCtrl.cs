@@ -20,7 +20,7 @@ public float speed;
 
     }
     void OnTriggerEnter2D(Collider2D collision){
-        if(collision.gameObject.tag == "Finish"){
+        if(collision.gameObject.name == "MaxBullet"){
             Shot.bullet.Release(gameObject);
             
             //Destroy(gameObject);

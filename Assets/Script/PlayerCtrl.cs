@@ -7,26 +7,42 @@ public class PlayerCtrl : MonoBehaviour
     public float speed;
     public Animator anim;
 
-    float shotTime;
+    
+    float side;
+    float updown;
 
-    async void Update()
+    void Update()
     {  
-        shotTime+=Time.deltaTime;
+        
         var t=transform.position;
         var hInput = Input.GetAxisRaw("Horizontal");
-        var vInput = Input.GetAxisRaw("Vertical");
-        transform.position += new Vector3(hInput, vInput, 0).normalized * speed * Time.deltaTime;
+        //var vInput = Input.GetAxisRaw("Vertical");
+        if (Input.GetKey(KeyCode.A))
+        {
+           side -= speed * 0.7f * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            side += speed * 0.7f * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            updown -= speed * 0.7f * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            updown += speed* 0.7f * Time.deltaTime;
+        }
+        side = Mathf.Clamp(side, -10, 10);
+        updown = Mathf.Clamp(updown, -10, 10);
+        Vector3 curPos = transform.position;
+        Vector3 nextPosY = Vector3.up * updown * Time.deltaTime;
+        Vector3 nextPosX = Vector3.right * side * Time.deltaTime;
+        transform.position = curPos + nextPosX + nextPosY;
+        //transform.position += new Vector3(side, updown, 0)* Time.deltaTime;
         anim.SetFloat("Side",hInput);
 
-        if(Input.GetMouseButton(0))
-        {
-            if(shotTime>=0.2f){
-                var i = Shot.bullet.Get();
-                i.transform.position=transform.position;
-                shotTime=0;
-            }
-            
-        }
+        
     
     }
 }
