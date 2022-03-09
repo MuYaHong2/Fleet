@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BulletCtrl : MonoBehaviour
 {
-public float speed;
+    public float speed;
+    public int dmg;
     void Start()
     {
         
