@@ -13,7 +13,7 @@ public class Scrol : MonoBehaviour
     }
 
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
         Vector3 bPos=transform.position;
         Vector3 apos=Vector3.down*speed*Time.deltaTime;

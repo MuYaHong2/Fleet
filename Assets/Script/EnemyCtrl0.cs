@@ -5,24 +5,21 @@ using UnityEngine;
 public class EnemyCtrl0 : MonoBehaviour
 {
     public float speed;
-    public int health;
+    public int hp;
+    int health;
 
-    SpriteRenderer spriteRenderer;
+    //int health;
+
     Rigidbody2D rigid;
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
-        rigid.velocity = Vector2.down * speed;
+
     }
-    void OnHit(int dmg)
+    void OnEnable()
     {
-        health -= dmg;
-            
-        if (health <= 0)
-        {
-            Genenrator.enemy0.Release(gameObject);
-        }
+        rigid.velocity = Vector2.down * speed;
+        health = hp;
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,10 +29,25 @@ public class EnemyCtrl0 : MonoBehaviour
             OnHit(bulletCtrl.dmg);
         }
     }
+    void OnHit(int dmg)
+    {
+        health -= dmg;
+        if (health <= 0)
+        {
+            var i = BoomG.boom.Get();
+            i.transform.position = transform.position;
+            Genenrator.enemy0.Release(gameObject);
+        }
+    }
+   
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (transform.position.y<=-6)
+        {
+            Genenrator.enemy0.Release(gameObject);
+        }
+
     }
 }

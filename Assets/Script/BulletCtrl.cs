@@ -16,16 +16,16 @@ public class BulletCtrl : MonoBehaviour
     {
         transform.position += new Vector3(0,speed,0)*Time.deltaTime;
     }
-    void OnEnavle()
+    void OnEnable()
     {
 
     }
     void OnTriggerEnter2D(Collider2D collision){
-        if(collision.gameObject.name == "MaxBullet"){
+        if(collision.gameObject.name == "MaxBullet"||collision.gameObject.tag=="enemy")
+        {
             Shot.bullet.Release(gameObject);
-            
-            //Destroy(gameObject);
         }
+
 
     }
 }
