@@ -6,7 +6,8 @@ public class EnemyCtrl0 : MonoBehaviour
 {
     public float speed;
     public int hp;
-    int health;
+    public int health;
+    string n;
 
     //int health;
 
@@ -14,7 +15,7 @@ public class EnemyCtrl0 : MonoBehaviour
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-
+        n = gameObject.name;
     }
     void OnEnable()
     {
@@ -36,7 +37,7 @@ public class EnemyCtrl0 : MonoBehaviour
         {
             var i = BoomG.boom.Get();
             i.transform.position = transform.position;
-            Genenrator.enemy0.Release(gameObject);
+            Release();
         }
     }
    
@@ -46,8 +47,23 @@ public class EnemyCtrl0 : MonoBehaviour
     {
         if (transform.position.y<=-6)
         {
-            Genenrator.enemy0.Release(gameObject);
+            Release();
+            Debug.Log(n);
         }
-
+    }
+    void Release()
+    {
+        switch (n)
+        {
+            case "Enemy A(Clone)":
+                Genenrator.enemy2.Release(gameObject);
+                break;
+            case "Enemy B(Clone)":
+                Genenrator.enemy1.Release(gameObject);
+                break;
+            case "Enemy C(Clone)":
+                Genenrator.enemy0.Release(gameObject);
+                break;
+        }
     }
 }

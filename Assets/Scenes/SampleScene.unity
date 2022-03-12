@@ -169,6 +169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab0: {fileID: 5741884171580335092, guid: 88da5b3854c73074288d7683f39afb43, type: 3}
+  prefab1: {fileID: 990200705449168370, guid: 6dee8c0928cd9de4b856261bac28ed7b, type: 3}
+  prefab2: {fileID: 4381588939237402472, guid: ba0a8609b96595e4fbf942508f2bc5b1, type: 3}
+  prefab3: {fileID: 3552388433070497437, guid: e2b393b61d4da9641ad55c73aed2a3db, type: 3}
+  prefab4: {fileID: 2361679705744156212, guid: f828b4b2cb8df41458a659d26014d1a8, type: 3}
   prefabs:
   - {fileID: 1614441155}
   - {fileID: 1091625469}
@@ -188,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5809383843771832105, guid: e0fb70815aaa7ad4e84730328c22909c, type: 3}
+  prefab1: {fileID: 4082671913169985190, guid: 6ac3a0222be30d347ac84bc2ab644af7, type: 3}
 --- !u!1 &359121024
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +289,7 @@ GameObject:
   - component: {fileID: 391755013}
   m_Layer: 0
   m_Name: Wall (3)
-  m_TagString: Untagged
+  m_TagString: MaxBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -314,7 +319,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -930,7 +935,7 @@ GameObject:
   - component: {fileID: 1063629822}
   m_Layer: 0
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: MaxBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1572,35 +1577,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1571424180}
   - component: {fileID: 1571424179}
-  - component: {fileID: 1571424178}
   m_Layer: 0
   m_Name: Wall (0)
-  m_TagString: Untagged
+  m_TagString: MaxBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &1571424178
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1571424177}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!61 &1571424179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1611,7 +1594,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2143,7 +2126,7 @@ GameObject:
   - component: {fileID: 1924059400}
   m_Layer: 0
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: MaxBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
