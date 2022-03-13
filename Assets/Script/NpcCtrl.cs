@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class NpcCtrl : MonoBehaviour
 {
     Rigidbody2D rigid;
     public float speed;
+    public static IObjectPool<GameObject>[] item; 
     public int hp;
     public int health;
     string n;
+    int i;
     // Start is called before the first frame update
 
     void Awake()
@@ -17,10 +20,15 @@ public class NpcCtrl : MonoBehaviour
         n = gameObject.name;
     }
 
+    void Start()
+    {
+        item =new IObjectPool<GameObject>[]{ NGenerator.Item0, NGenerator.Item1, NGenerator.Item2, NGenerator.Item3 };
+    }
     void OnEnable()
     {
         rigid.velocity = Vector2.down * speed;
         health = hp;
+        i = Random.Range(0, 4);
     }
 
     // Update is called once per frame
@@ -47,10 +55,31 @@ public class NpcCtrl : MonoBehaviour
         switch (n)
         {
             case "leukocyte(Clone)":
-                Genenrator.enemy3.Release(gameObject);
+                Generator.enemy3.Release(gameObject);
+                var j = item[i].Get();
+                j.transform.position = transform.position;
+                /*switch (i)
+                {
+                    case 0:
+                        var j = NGenerator.Item0.Get();
+                        j.transform.position = transform.position;
+                        break;
+                    case 1:
+                        var a = NGenerator.Item1.Get();
+                        a.transform.position = transform.position;
+                        break;
+                    case 2:
+                        var b = NGenerator.Item2.Get();
+                        b.transform.position = transform.position;
+                        break;
+                    case 3:
+                        var c = NGenerator.Item3.Get();
+                        c.transform.position = transform.position;
+                        break;
+                }*/
                 break;
             case "rbc(Clone)":
-                Genenrator.enemy4.Release(gameObject);
+                Generator.enemy4.Release(gameObject);
                 break;
         }
     }

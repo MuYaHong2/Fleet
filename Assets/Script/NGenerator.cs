@@ -16,12 +16,14 @@ public class NGenerator : MonoBehaviour
     public GameObject prefab3;
     public GameObject[] prefabs;
 
+    
+
     float time;
     int p;
     int s;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Item0 = new ObjectPool<GameObject>(() => { return Instantiate(prefab0, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
         Item1 = new ObjectPool<GameObject>(() => { return Instantiate(prefab1, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
@@ -34,8 +36,8 @@ public class NGenerator : MonoBehaviour
         time += Time.deltaTime;
         if (time >= 1)
         {
-            s = Random.Range(0, 3);
-            p = Random.Range(0, 4);
+            s = Random.Range(0, 4);
+            p = Random.Range(0, 5);
             switch (s)
             {
                 case 0:

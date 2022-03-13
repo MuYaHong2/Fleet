@@ -1,20 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCtrl : MonoBehaviour
 {
     public float speed;
     public Animator anim;
     public int health;
+    int maxHealth;
+    Gauge pain;
+    Shot shot;
 
     
     float side;
     float updown;
 
+    void Start()
+    {
+        pain = FindObjectOfType<Gauge>();
+        shot = GetComponent<Shot>();
+        maxHealth = health;
+    }
     void Update()
-    {  
-        
+    {
+        if (health>=maxHealth)
+        {
+            health = maxHealth;
+        }
         var t=transform.position;
         var hInput = Input.GetAxisRaw("Horizontal");
         //var vInput = Input.GetAxisRaw("Vertical");
@@ -42,7 +55,10 @@ public class PlayerCtrl : MonoBehaviour
         transform.position = curPos + nextPosX + nextPosY;
         //transform.position += new Vector3(side, updown, 0)* Time.deltaTime;
         anim.SetFloat("Side",hInput);
-
+        if (health<=0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
         
     
     }
@@ -50,7 +66,20 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (other.gameObject.tag == "enemy")
         {
-            health -= 5;
+            health -= 1;
         }
+        switch (other.gameObject.name)
+        {
+            case "Heal(Clone)":
+                    health += 5;
+                break;
+            case "Painkiller(Clone)":
+                pain.pain -= 2;
+                break;
+            case "Power Up(Clone)":
+                shot.bulletLevel += 1;
+                break;
+        }
+
     }
 }

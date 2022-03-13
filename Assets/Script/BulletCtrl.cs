@@ -6,9 +6,10 @@ public class BulletCtrl : MonoBehaviour
 {
     public float speed;
     public int dmg;
+    string n;
     void Start()
     {
-
+        n = gameObject.name;
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class BulletCtrl : MonoBehaviour
     {
         if (collision.gameObject.tag == "MaxBullet")
         {
-            Shot.bullet.Release(gameObject);
+            Release();
         }
         else if (collision.gameObject.tag == "enemy" || collision.gameObject.tag == "Npc")
         {
@@ -34,7 +35,22 @@ public class BulletCtrl : MonoBehaviour
                 var i = BoomG.boom1.Get();
                 i.transform.position = transform.position;
             }
-            Shot.bullet.Release(gameObject);
+            Release();
+        }
+    }
+    void Release()
+    {
+        switch (n)
+        {
+            case "Player Bullet 0(Clone)":
+                Shot.bullet1.Release(gameObject);
+                break;
+            case "Player Bullet 1(Clone)":
+                Shot.bullet.Release(gameObject);
+                break;
+            case "Follower Bullet(Clone)":
+                Shot.bullet2.Release(gameObject);
+                break;
         }
     }
 }

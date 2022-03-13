@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ItemCtrl : MonoBehaviour
 {
     public float speed;
+
 
     string n;
 
@@ -40,7 +42,7 @@ public class ItemCtrl : MonoBehaviour
             case "Invincibility(Clone)":
                 NGenerator.Item0.Release(gameObject);
                 break;
-            case "PainKiller(Clone)":
+            case "Painkiller(Clone)":
                 NGenerator.Item1.Release(gameObject);
                 break;
             case "Power Up(Clone)":
