@@ -6,6 +6,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     public float speed;
     public Animator anim;
+    public int health;
 
     
     float side;
@@ -44,5 +45,12 @@ public class PlayerCtrl : MonoBehaviour
 
         
     
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "enemy")
+        {
+            health -= 5;
+        }
     }
 }

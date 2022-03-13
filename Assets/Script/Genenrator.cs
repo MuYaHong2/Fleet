@@ -38,7 +38,7 @@ public class Genenrator : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time>=0.5f)
+        if (time>=1)
         {
             s = Random.Range(0, 5);
             p = Random.Range(0, 4);

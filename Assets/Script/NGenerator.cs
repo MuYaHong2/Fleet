@@ -14,6 +14,11 @@ public class NGenerator : MonoBehaviour
     public GameObject prefab1;
     public GameObject prefab2;
     public GameObject prefab3;
+    public GameObject[] prefabs;
+
+    float time;
+    int p;
+    int s;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +31,33 @@ public class NGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        time += Time.deltaTime;
+        if (time >= 1)
+        {
+            s = Random.Range(0, 3);
+            p = Random.Range(0, 4);
+            switch (s)
+            {
+                case 0:
+                    var i = Item0.Get();
+                    i.transform.position = prefabs[p].transform.position;
+                    time = 0;
+                    break;
+                case 1:
+                    var j = Item1.Get();
+                    j.transform.position = prefabs[p].transform.position;
+                    time = 0;
+                    break;
+                case 2:
+                    var n = Item2.Get();
+                    n.transform.position = prefabs[p].transform.position;
+                    break;
+                case 3:
+                    var a = Item3.Get();
+                    a.transform.position = prefabs[p].transform.position;
+                    break;
+            }
+
+        }
     }
 }
