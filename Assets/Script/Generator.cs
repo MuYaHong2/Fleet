@@ -10,16 +10,14 @@ public class Generator : MonoBehaviour
     public static IObjectPool<GameObject> enemy2;
     public static IObjectPool<GameObject> enemy3;
     public static IObjectPool<GameObject> enemy4;
-
-    public EnemyShoot enemyShoot;
+    public static IObjectPool<GameObject> EnemyBullet;
 
     public GameObject prefab0;
     public GameObject prefab1;
     public GameObject prefab2;
     public GameObject prefab3;
     public GameObject prefab4;
-    public GameObject Player;
-    public GameObject enemy;
+    public GameObject enemyBullet;
 
     public GameObject [] prefabs;
 
@@ -29,13 +27,13 @@ public class Generator : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        enemyShoot = enemy.GetComponent<EnemyShoot>();
+    {     
         enemy0 = new ObjectPool<GameObject>(() => { return Instantiate(prefab0, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
         enemy1 = new ObjectPool<GameObject>(() => { return Instantiate(prefab1, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
         enemy2 = new ObjectPool<GameObject>(() => { return Instantiate(prefab2, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
         enemy3 = new ObjectPool<GameObject>(() => { return Instantiate(prefab3, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
         enemy4 = new ObjectPool<GameObject>(() => { return Instantiate(prefab4, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
+        EnemyBullet = new ObjectPool<GameObject>(() => { return Instantiate(enemyBullet, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
     }
 
     // Update is called once per frame
@@ -51,7 +49,6 @@ public class Generator : MonoBehaviour
                 case 0:
                     var i = enemy0.Get();
                     i.transform.position = prefabs[p].transform.position;
-                    enemyShoot.player = Player;
                     time = 0;
                     break;
                 case 1:

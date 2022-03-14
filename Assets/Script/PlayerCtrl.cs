@@ -15,6 +15,7 @@ public class PlayerCtrl : MonoBehaviour
     
     float side;
     float updown;
+    bool hitBox;
 
     void Start()
     {
@@ -79,7 +80,17 @@ public class PlayerCtrl : MonoBehaviour
             case "Power Up(Clone)":
                 shot.bulletLevel += 1;
                 break;
+            case "Enemy Bullet 3(Clone)":
+                health -= 1;
+                break;
+            case "Invincibility(Clone)":
+                Invincibility();
+                break;
         }
+
+    }
+    void Invincibility()
+    {
 
     }
 }

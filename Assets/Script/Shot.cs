@@ -34,6 +34,10 @@ public class Shot : MonoBehaviour
             {
                 Shoot();
             }
+            if (bulletLevel>=5)
+            {
+                bulletLevel = 5;
+            }
         }
     }
     void Shoot()
