@@ -19,6 +19,18 @@ public class EnemyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
+        if (transform.position.y <= -6)
+        {
+            Generator.EnemyBullet.Release(gameObject);
+        }
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name=="Player")
+        {
+            var i = BoomG.boom1.Get();
+            i.transform.position = transform.position;
+            Generator.EnemyBullet.Release(gameObject);
+        }
     }
 }

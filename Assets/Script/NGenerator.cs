@@ -34,7 +34,7 @@ public class NGenerator : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time >= 1)
+        if (time >= 5)
         {
             s = Random.Range(0, 4);
             p = Random.Range(0, 5);

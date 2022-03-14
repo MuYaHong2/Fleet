@@ -9,6 +9,9 @@ public class EnemyCtrl0 : MonoBehaviour
     public int health;
     string n;
     public Gauge gauge;
+    public Score score;
+    public Generator g;
+    int scorePoint0;
 
     //int health;
 
@@ -18,11 +21,14 @@ public class EnemyCtrl0 : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         n = gameObject.name;
         gauge = FindObjectOfType<Gauge>();
+        score = FindObjectOfType<Score>();
+        g = FindObjectOfType<Generator>();
     }
     void OnEnable()
     {
         rigid.velocity = Vector2.down * speed;
         health = hp;
+        scorePoint0 = hp*100;
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -39,7 +45,8 @@ public class EnemyCtrl0 : MonoBehaviour
         {
             var i = BoomG.boom.Get();
             i.transform.position = transform.position;
-
+            score.scorePoint += scorePoint0;
+            g.enemyCount += 1;
             Release();
         }
     }
@@ -50,13 +57,18 @@ public class EnemyCtrl0 : MonoBehaviour
     {
         if (transform.position.y<=-6)
         {
+
             Release();
-            Debug.Log(n);
             gauge.pain += 1;
+        }
+        if (g.isBoss==true)
+        {
+            Release();
         }
     }
     void Release()
     {
+
         switch (n)
         {
             case "Enemy A(Clone)":

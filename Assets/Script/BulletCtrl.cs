@@ -37,6 +37,12 @@ public class BulletCtrl : MonoBehaviour
             }
             Release();
         }
+        else if (collision.gameObject.tag == "boss")
+        {
+            var i = BoomG.boom1.Get();
+            i.transform.position = transform.position;
+            Release();
+        }
     }
     void Release()
     {

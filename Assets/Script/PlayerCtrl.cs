@@ -8,6 +8,7 @@ public class PlayerCtrl : MonoBehaviour
     public float speed;
     public Animator anim;
     public int health;
+    public GameObject shield;
     int maxHealth;
     Gauge pain;
     Shot shot;
@@ -16,15 +17,32 @@ public class PlayerCtrl : MonoBehaviour
     float side;
     float updown;
     bool hitBox;
+    float Shield;
+    bool isShield;
+    float i;
 
     void Start()
     {
         pain = FindObjectOfType<Gauge>();
         shot = GetComponent<Shot>();
         maxHealth = health;
+        shield.SetActive(false);
     }
     void Update()
     {
+        if (Shield>=0)
+        {
+            isShield = true;
+            Shield -= Time.deltaTime;
+            if (Shield<=0.5f)
+            {
+                shield.SetActive(false);
+                if (i<=0)
+                {
+                    isShield = false;
+                }
+            }
+        }
         if (health>=maxHealth)
         {
             health = maxHealth;
@@ -86,11 +104,15 @@ public class PlayerCtrl : MonoBehaviour
             case "Invincibility(Clone)":
                 Invincibility();
                 break;
+            case "Enemy Bullet 0(Clone)":
+                health -= 2;
+                break;
         }
 
     }
     void Invincibility()
     {
-
+        shield.SetActive(true);
+        Shield += 3;
     }
 }

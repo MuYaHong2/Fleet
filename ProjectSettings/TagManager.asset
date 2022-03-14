@@ -8,6 +8,7 @@ TagManager:
   - enemy
   - MaxBullet
   - Npc
+  - boss
   layers:
   - Default
   - TransparentFX
