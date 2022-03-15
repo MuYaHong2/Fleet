@@ -6,6 +6,8 @@ using UnityEngine.Pool;
 public class NpcCtrl : MonoBehaviour
 {
     Rigidbody2D rigid;
+    public Gauge gauge;
+    public Score score;
     public float speed;
     public static IObjectPool<GameObject>[] item; 
     public int hp;
@@ -17,6 +19,8 @@ public class NpcCtrl : MonoBehaviour
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        gauge = FindObjectOfType<Gauge>();
+        score = FindObjectOfType<Score>();
         n = gameObject.name;
     }
 
@@ -39,6 +43,10 @@ public class NpcCtrl : MonoBehaviour
             Release();
         }
         Debug.Log(n);
+        if (score.isClear==true)
+        {
+            Release();
+        }
     }
     void OnHit(int dmg)
     {
@@ -48,6 +56,10 @@ public class NpcCtrl : MonoBehaviour
             var i = BoomG.boom.Get();
             i.transform.position = transform.position;
             Release();
+            if (n== "rbc(Clone)")
+            {
+                gauge.pain += 1;
+            }
         }
     }
     void Release()

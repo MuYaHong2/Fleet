@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoosCtrl : MonoBehaviour
+public class BossCtrl : MonoBehaviour
 {
     public int health;
-    public bool bossCliear;
+    public bool bossClear;
+    public GameObject director;
+    public GameObject g;
+    public GameObject[] sponPoint;
+    Generator gener;
+    Score score;
     // Start is called before the first frame update
     void Start()
     {
         gameObject.SetActive(false);
-        bossCliear = false;
+        score = director.GetComponent<Score>();
+        gener = g.GetComponent<Generator>();
     }
 
     // Update is called once per frame
@@ -34,7 +40,8 @@ public class BoosCtrl : MonoBehaviour
             var i = BoomG.boom2.Get();
             i.transform.position = transform.position;
             Destroy(gameObject);
-            bossCliear = true;
+            bossClear = true;
+            gener.enemyCount = 0;
         }
     }
 }

@@ -85,7 +85,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (other.gameObject.tag == "enemy")
         {
-            health -= 1;
+            if (isShield==false)
+            {
+                health -= 1;
+            }
         }
         switch (other.gameObject.name)
         {
@@ -99,13 +102,19 @@ public class PlayerCtrl : MonoBehaviour
                 shot.bulletLevel += 1;
                 break;
             case "Enemy Bullet 3(Clone)":
-                health -= 1;
+                if (isShield == false)
+                {
+                    health -= 1;
+                }
                 break;
             case "Invincibility(Clone)":
                 Invincibility();
                 break;
             case "Enemy Bullet 0(Clone)":
-                health -= 2;
+                if (isShield == false)
+                {
+                    health -= 2;
+                }
                 break;
         }
 

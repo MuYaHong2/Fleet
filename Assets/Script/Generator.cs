@@ -21,7 +21,7 @@ public class Generator : MonoBehaviour
     public GameObject enemyBullet;
     public GameObject bossBullet;
     public GameObject Boss;
-    BoosCtrl b;
+    BossCtrl b;
 
     public GameObject [] prefabs;
 
@@ -36,7 +36,7 @@ public class Generator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        b = Boss.GetComponent<BoosCtrl>();
+        b = Boss.GetComponent<BossCtrl>();
         enemyCount = 0;
         enemy0 = new ObjectPool<GameObject>(() => { return Instantiate(prefab0, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
         enemy1 = new ObjectPool<GameObject>(() => { return Instantiate(prefab1, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
@@ -51,10 +51,10 @@ public class Generator : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (enemyCount>=30)
+        if (enemyCount>=10)
         {
 
-            if (b.bossCliear==false)
+            if (b.bossClear==false)
             {
                 Boss.SetActive(true);
             }
@@ -65,7 +65,7 @@ public class Generator : MonoBehaviour
         {
             if (time >= 3)
             {
-                s = Random.Range(0, 5);
+                s = Random.Range(0, 8);
                 p = Random.Range(0, 5);
                 switch (s)
                 {
@@ -82,16 +82,37 @@ public class Generator : MonoBehaviour
                     case 2:
                         var n = enemy2.Get();
                         n.transform.position = prefabs[p].transform.position;
+                        time = 0;
                         break;
                     case 3:
                         var a = enemy3.Get();
                         a.transform.position = prefabs[p].transform.position;
+                        time = 0;
                         break;
                     case 4:
                         var b = enemy4.Get();
                         b.transform.position = prefabs[p].transform.position;
+                        time = 0;
                         break;
                     case 5:
+                        var c = enemy0.Get();
+                        c.transform.position = prefabs[p].transform.position;
+                        time = 0;
+                        break;
+                    case 6:
+                        var d = enemy1.Get();
+                        d.transform.position = prefabs[p].transform.position;
+                        time = 0;
+                        break;
+                    case 7:
+                        var e = enemy2.Get();
+                        e.transform.position = prefabs[p].transform.position;
+                        time = 0;
+                        break;
+                    case 8:
+                        var f = enemy4.Get();
+                        f.transform.position = prefabs[p].transform.position;
+                        time = 0;
                         break;
                 }
 
