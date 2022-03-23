@@ -7,16 +7,16 @@ public class BossCtrl : MonoBehaviour
     public int health;
     public bool bossClear;
     public GameObject director;
-    public GameObject g;
     public GameObject[] sponPoint;
-    Generator gener;
+    public Generator gener;
+    public int stage;
+    public bool clear;
     Score score;
     // Start is called before the first frame update
     void Start()
     {
         gameObject.SetActive(false);
         score = director.GetComponent<Score>();
-        gener = g.GetComponent<Generator>();
     }
 
     // Update is called once per frame
@@ -37,11 +37,11 @@ public class BossCtrl : MonoBehaviour
         health -= dmg;
         if (health <= 0)
         {
-            var i = BoomG.boom2.Get();
-            i.transform.position = transform.position;
-            Destroy(gameObject);
+            GameObject boom = gener.MakeObj("bomC");
+            boom.transform.position = transform.position;
+            gameObject.SetActive(false);
             bossClear = true;
-            gener.enemyCount = 0;
         }
+           
     }
 }

@@ -6,23 +6,28 @@ using UnityEngine.Pool;
 public class EnemyShoot : MonoBehaviour
 {
     public GameObject enemyBullet;
+    public Generator generator;
 
     float shootTime;
 
-    // Update is called once per frame
+
+    void Awake()
+    {
+        generator = FindObjectOfType<Generator>();
+    }
     void Update()
     {
         shootTime += Time.deltaTime;
         if (shootTime>=2)
         {
             Fire();
+            shootTime = 0;
         }
     }
 
     void Fire()
     {
-        var i = Generator.EnemyBullet.Get();
-        i.transform.position = transform.position;
-        shootTime = 0;
+        GameObject eBullet = generator.MakeObj("enemyBullet");
+        eBullet.transform.position = gameObject.transform.position;
     }
 }

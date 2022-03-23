@@ -10,7 +10,8 @@ public class EnemyCtrl0 : MonoBehaviour
     string n;
     public Gauge gauge;
     public Score score;
-    public Generator g;
+    public Gamemanager gameManager;
+    public Generator generator;
     int scorePoint0;
 
     //int health;
@@ -22,7 +23,8 @@ public class EnemyCtrl0 : MonoBehaviour
         n = gameObject.name;
         gauge = FindObjectOfType<Gauge>();
         score = FindObjectOfType<Score>();
-        g = FindObjectOfType<Generator>();
+        gameManager = FindObjectOfType<Gamemanager>();
+        generator = FindObjectOfType<Generator>();
     }
     void OnEnable()
     {
@@ -43,10 +45,10 @@ public class EnemyCtrl0 : MonoBehaviour
         health -= dmg;
         if (health <= 0)
         {
-            var i = BoomG.boom.Get();
-            i.transform.position = transform.position;
+            GameObject bome = generator.MakeObj("bomB");
+            bome.transform.position = transform.position;
             score.scorePoint += scorePoint0;
-            g.enemyCount += 1;
+            gameManager.count += 1;
             Release();
         }
     }
@@ -61,25 +63,10 @@ public class EnemyCtrl0 : MonoBehaviour
             Release();
             gauge.pain += 1;
         }
-        if (g.isBoss==true)
-        {
-            Release();
-        }
+        
     }
     void Release()
     {
-
-        switch (n)
-        {
-            case "Enemy A(Clone)":
-                Generator.enemy2.Release(gameObject);
-                break;
-            case "Enemy B(Clone)":
-                Generator.enemy1.Release(gameObject);
-                break;
-            case "Enemy C(Clone)":
-                Generator.enemy0.Release(gameObject);
-                break;
-        }
+        gameObject.SetActive(false);
     }
 }

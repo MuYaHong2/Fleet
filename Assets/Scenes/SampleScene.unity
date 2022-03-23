@@ -123,6 +123,66 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &56457189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56457190}
+  - component: {fileID: 56457191}
+  m_Layer: 0
+  m_Name: Gamemanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &56457190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56457189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4141706, y: 3.8698475, z: -0.013510664}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &56457191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56457189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ac3055c8c640d4cb7c4f2de39a5418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyObjs:
+  - 
+  - 
+  - 
+  npcObjs: []
+  itemObjs: []
+  spawnPoint:
+  - {fileID: 1614441155}
+  - {fileID: 1091625469}
+  - {fileID: 359121024}
+  - {fileID: 1082469379}
+  - {fileID: 1639988481}
+  boss: {fileID: 2089871017}
+  count: 0
+  isBoss: 0
+  generator: {fileID: 203880212}
 --- !u!1 &143091437
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1129252815}
+  generator: {fileID: 203880212}
 --- !u!212 &143091440
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -342,22 +403,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d8e556720095244a906e4006628213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab0: {fileID: 5741884171580335092, guid: 88da5b3854c73074288d7683f39afb43, type: 3}
-  prefab1: {fileID: 990200705449168370, guid: 6dee8c0928cd9de4b856261bac28ed7b, type: 3}
-  prefab2: {fileID: 4381588939237402472, guid: ba0a8609b96595e4fbf942508f2bc5b1, type: 3}
-  prefab3: {fileID: 3552388433070497437, guid: e2b393b61d4da9641ad55c73aed2a3db, type: 3}
-  prefab4: {fileID: 2361679705744156212, guid: f828b4b2cb8df41458a659d26014d1a8, type: 3}
-  enemyBullet: {fileID: 5532549823062475711, guid: 1525e79f373b83241bb0664b31025261, type: 3}
-  bossBullet: {fileID: 344129937980758841, guid: 889ea51867a137d449d9d0d632f05199, type: 3}
-  Boss: {fileID: 2089871017}
-  prefabs:
-  - {fileID: 1614441155}
-  - {fileID: 1091625469}
-  - {fileID: 359121024}
-  - {fileID: 1082469379}
-  - {fileID: 1639988481}
-  enemyCount: 0
-  isBoss: 0
+  enemyAPrefab: {fileID: 4381588939237402472, guid: ba0a8609b96595e4fbf942508f2bc5b1, type: 3}
+  enemyBPrefab: {fileID: 990200705449168370, guid: 6dee8c0928cd9de4b856261bac28ed7b, type: 3}
+  enemyCPrefab: {fileID: 5741884171580335092, guid: 88da5b3854c73074288d7683f39afb43, type: 3}
+  itemAPrefab: {fileID: 6683605220663121447, guid: 65bf2fc0b9efb254dad79a7d3b9536e7, type: 3}
+  itemBPrefab: {fileID: 405119230045788810, guid: 9e4e1c569bd32744d9965b49568a0732, type: 3}
+  itemCPrefab: {fileID: 6196027725944278625, guid: 4b287ca497548504c83501c3e0898674, type: 3}
+  itemDPrefab: {fileID: 3734944024913710433, guid: 14fe4ef15e224094cb64302db9ecc0be, type: 3}
+  npcAPrefab: {fileID: 3552388433070497437, guid: e2b393b61d4da9641ad55c73aed2a3db, type: 3}
+  npcBPrefab: {fileID: 2361679705744156212, guid: f828b4b2cb8df41458a659d26014d1a8, type: 3}
+  playerBullet1Prefab: {fileID: 9165635200816564621, guid: aa1cbd66bed82e343919f41bafcb746d, type: 3}
+  playerBullet2Prefab: {fileID: 4050410348362085994, guid: 874fe43651e58fc478aa490a392ed5ad, type: 3}
+  playerBullet3Prefab: {fileID: 7823785327354362763, guid: 91ba2357f68964a47bad66846cbcc191, type: 3}
+  enemyBulletPrefab: {fileID: 5532549823062475711, guid: 1525e79f373b83241bb0664b31025261, type: 3}
+  bossBulletPrefab: {fileID: 344129937980758841, guid: 889ea51867a137d449d9d0d632f05199, type: 3}
+  bomAPrefab: {fileID: 4082671913169985190, guid: 6ac3a0222be30d347ac84bc2ab644af7, type: 3}
+  bomBPrefab: {fileID: 5809383843771832105, guid: e0fb70815aaa7ad4e84730328c22909c, type: 3}
+  bomCPrefab: {fileID: 5809383843771832105, guid: 1a8fb3174a113084cbd6aeb419e9ae55, type: 3}
 --- !u!114 &203880213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,9 +432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6db7b58d4a9d84ca1e5143b39b2e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5809383843771832105, guid: e0fb70815aaa7ad4e84730328c22909c, type: 3}
-  prefab1: {fileID: 4082671913169985190, guid: 6ac3a0222be30d347ac84bc2ab644af7, type: 3}
-  prefab2: {fileID: 5809383843771832105, guid: 1a8fb3174a113084cbd6aeb419e9ae55, type: 3}
 --- !u!1 &359121024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1129252815}
+  generator: {fileID: 203880212}
 --- !u!1 &856325336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,7 +1492,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 203880211}
-  - {fileID: 1600596163}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2313,12 +2372,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9feca4ef7b96cc84ea7c5fb40d5011ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletLevel: 2
-  prefab: {fileID: 4050410348362085994, guid: 874fe43651e58fc478aa490a392ed5ad, type: 3}
-  prefab1: {fileID: 9165635200816564621, guid: aa1cbd66bed82e343919f41bafcb746d, type: 3}
-  prefab2: {fileID: 7823785327354362763, guid: 91ba2357f68964a47bad66846cbcc191, type: 3}
   shootPoint: {fileID: 558942595}
   shootPoint1: {fileID: 1783042962}
+  generator: {fileID: 203880212}
+  bulletLevel: 2
 --- !u!61 &1129252821
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2522,60 +2579,6 @@ Transform:
   m_Father: {fileID: 644611261}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1600596162
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1600596163}
-  - component: {fileID: 1600596164}
-  m_Layer: 0
-  m_Name: ItemGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1600596163
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600596162}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 928228694}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1600596164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600596162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff2718f7149b969438183dbaea50506d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab0: {fileID: 6196027725944278625, guid: 4b287ca497548504c83501c3e0898674, type: 3}
-  prefab1: {fileID: 3734944024913710433, guid: 14fe4ef15e224094cb64302db9ecc0be, type: 3}
-  prefab2: {fileID: 405119230045788810, guid: 9e4e1c569bd32744d9965b49568a0732, type: 3}
-  prefab3: {fileID: 6683605220663121447, guid: 65bf2fc0b9efb254dad79a7d3b9536e7, type: 3}
-  prefabs:
-  - {fileID: 1614441155}
-  - {fileID: 1091625469}
-  - {fileID: 359121024}
-  - {fileID: 1082469379}
-  - {fileID: 1639988481}
 --- !u!1 &1601218773
 GameObject:
   m_ObjectHideFlags: 0
@@ -3497,8 +3500,10 @@ MonoBehaviour:
   health: 500
   bossClear: 0
   director: {fileID: 1124104465}
-  g: {fileID: 203880210}
   sponPoint: []
+  gener: {fileID: 203880212}
+  stage: 0
+  clear: 0
 --- !u!70 &2089871022
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

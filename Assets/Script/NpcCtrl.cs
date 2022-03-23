@@ -8,10 +8,13 @@ public class NpcCtrl : MonoBehaviour
     Rigidbody2D rigid;
     public Gauge gauge;
     public Score score;
+    public Generator generator;
     public float speed;
     public static IObjectPool<GameObject>[] item; 
     public int hp;
     public int health;
+    public string[] itemObjs;
+
     string n;
     int i;
     // Start is called before the first frame update
@@ -21,12 +24,14 @@ public class NpcCtrl : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         gauge = FindObjectOfType<Gauge>();
         score = FindObjectOfType<Score>();
+        generator = FindObjectOfType<Generator>();
         n = gameObject.name;
     }
 
     void Start()
     {
-        item =new IObjectPool<GameObject>[]{ NGenerator.Item0, NGenerator.Item1, NGenerator.Item2, NGenerator.Item3 };
+        itemObjs = new string[] { "itemA", "itemB", "itemC", "itemD" };
+
     }
     void OnEnable()
     {
@@ -40,12 +45,12 @@ public class NpcCtrl : MonoBehaviour
     {
         if (transform.position.y <= -6)
         {
-            Release();
+            gameObject.SetActive(false);
         }
         Debug.Log(n);
         if (score.isClear==true)
         {
-            Release();
+            gameObject.SetActive(false);
         }
     }
     void OnHit(int dmg)
@@ -53,13 +58,9 @@ public class NpcCtrl : MonoBehaviour
         health -= dmg;
         if (health <= 0)
         {
-            var i = BoomG.boom.Get();
-            i.transform.position = transform.position;
+            GameObject bome = generator.MakeObj("bomB");
+            bome.transform.position = transform.position; 
             Release();
-            if (n== "rbc(Clone)")
-            {
-                gauge.pain += 1;
-            }
         }
     }
     void Release()
@@ -67,9 +68,10 @@ public class NpcCtrl : MonoBehaviour
         switch (n)
         {
             case "leukocyte(Clone)":
-                Generator.enemy3.Release(gameObject);
-                var j = item[i].Get();
-                j.transform.position = transform.position;
+                Debug.Log("dfjldsf");
+                GameObject item = generator.MakeObj(itemObjs[i]);
+                item.transform.position = transform.position;
+                gameObject.SetActive(false);
                 /*switch (i)
                 {
                     case 0:
@@ -91,7 +93,8 @@ public class NpcCtrl : MonoBehaviour
                 }*/
                 break;
             case "rbc(Clone)":
-                Generator.enemy4.Release(gameObject);
+                gauge.pain += 1;
+                gameObject.SetActive(false);
                 break;
         }
     }

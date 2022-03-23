@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossAtek : MonoBehaviour
 {
     public GameObject player;
+    public Generator generator;
     float aTime;
     // Start is called before the first frame update
     void Start()
@@ -21,9 +22,9 @@ public class BossAtek : MonoBehaviour
         aTime += Time.deltaTime;
         if (aTime>=1.5f)
         {
-            var i = Generator.BossBullet.Get();
-            i.transform.position = transform.position;
-            i.transform.rotation = transform.rotation;
+            GameObject bullet = generator.MakeObj("bossBullet");
+            bullet.transform.position = gameObject.transform.position;
+            bullet.transform.rotation = gameObject.transform.rotation;
             aTime = 0;
         }
     }

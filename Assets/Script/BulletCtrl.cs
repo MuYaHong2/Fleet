@@ -6,10 +6,14 @@ public class BulletCtrl : MonoBehaviour
 {
     public float speed;
     public int dmg;
+
+    public Generator generator;
+
     string n;
     void Start()
     {
         n = gameObject.name;
+        generator = FindObjectOfType<Generator>();
     }
 
     // Update is called once per frame
@@ -27,36 +31,32 @@ public class BulletCtrl : MonoBehaviour
         {
             Release();
         }
-        else if (collision.gameObject.tag == "enemy" || collision.gameObject.tag == "Npc")
+        else if (collision.gameObject.tag == "enemy" )
         {
             EnemyCtrl0 enemyCtrl = collision.gameObject.GetComponent<EnemyCtrl0>();
             if (enemyCtrl.health>dmg)
             {
-                var i = BoomG.boom1.Get();
-                i.transform.position = transform.position;
+                GameObject boom = generator.MakeObj("bomA");
+                boom.transform.position = transform.position;
             }
             Release();
         }
+        else if (collision.gameObject.tag == "Npc")
+        {
+            GameObject boom = generator.MakeObj("bomA");
+            boom.transform.position = transform.position;
+            Release();
+
+        }
         else if (collision.gameObject.tag == "boss")
         {
-            var i = BoomG.boom1.Get();
-            i.transform.position = transform.position;
+            GameObject boom = generator.MakeObj("bomA");
+            boom.transform.position = transform.position;
             Release();
         }
     }
     void Release()
     {
-        switch (n)
-        {
-            case "Player Bullet 0(Clone)":
-                Shot.bullet1.Release(gameObject);
-                break;
-            case "Player Bullet 1(Clone)":
-                Shot.bullet.Release(gameObject);
-                break;
-            case "Follower Bullet(Clone)":
-                Shot.bullet2.Release(gameObject);
-                break;
-        }
+        gameObject.SetActive(false);
     }
 }

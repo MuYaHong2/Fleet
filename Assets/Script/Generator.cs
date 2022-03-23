@@ -5,118 +5,241 @@ using UnityEngine.Pool;
 
 public class Generator : MonoBehaviour
 {
-    public static IObjectPool<GameObject> enemy0;
-    public static IObjectPool<GameObject> enemy1;
-    public static IObjectPool<GameObject> enemy2;
-    public static IObjectPool<GameObject> enemy3;
-    public static IObjectPool<GameObject> enemy4;
-    public static IObjectPool<GameObject> EnemyBullet;
-    public static IObjectPool<GameObject> BossBullet;
+    public GameObject enemyAPrefab;
+    public GameObject enemyBPrefab;
+    public GameObject enemyCPrefab;
 
-    public GameObject prefab0;
-    public GameObject prefab1;
-    public GameObject prefab2;
-    public GameObject prefab3;
-    public GameObject prefab4;
-    public GameObject enemyBullet;
-    public GameObject bossBullet;
-    public GameObject Boss;
-    BossCtrl b;
+    public GameObject itemAPrefab;
+    public GameObject itemBPrefab;
+    public GameObject itemCPrefab;
+    public GameObject itemDPrefab;
 
-    public GameObject [] prefabs;
+    public GameObject npcAPrefab;
+    public GameObject npcBPrefab;
 
-    public int enemyCount;
-    public bool isBoss;
+    public GameObject playerBullet1Prefab;
+    public GameObject playerBullet2Prefab;
+    public GameObject playerBullet3Prefab;
+    public GameObject enemyBulletPrefab;
+    public GameObject bossBulletPrefab;
 
-    float time;
-    int p;
-    int s;
-    
+    public GameObject bomAPrefab;
+    public GameObject bomBPrefab;
+    public GameObject bomCPrefab;
 
-    // Start is called before the first frame update
-    void Start()
+    GameObject[] enemyA;
+    GameObject[] enemyB;
+    GameObject[] enemyC;
+
+    GameObject[] itemA;
+    GameObject[] itemB;
+    GameObject[] itemC;
+    GameObject[] itemD;
+
+    GameObject[] npcA;
+    GameObject[] npcB;
+
+    GameObject[] playerBullet1;
+    GameObject[] playerBullet2;
+    GameObject[] playerBullet3;
+    GameObject[] enemyBullet;
+    GameObject[] bossBullet;
+
+    GameObject[] bomA;
+    GameObject[] bomB;
+    GameObject[] bomC;
+
+    GameObject[] targetPool;
+
+    void Awake()
     {
-        b = Boss.GetComponent<BossCtrl>();
-        enemyCount = 0;
-        enemy0 = new ObjectPool<GameObject>(() => { return Instantiate(prefab0, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
-        enemy1 = new ObjectPool<GameObject>(() => { return Instantiate(prefab1, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
-        enemy2 = new ObjectPool<GameObject>(() => { return Instantiate(prefab2, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
-        enemy3 = new ObjectPool<GameObject>(() => { return Instantiate(prefab3, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
-        enemy4 = new ObjectPool<GameObject>(() => { return Instantiate(prefab4, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
-        EnemyBullet = new ObjectPool<GameObject>(() => { return Instantiate(enemyBullet, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
-        BossBullet = new ObjectPool<GameObject>(() => { return Instantiate(bossBullet, transform.position, transform.rotation); }, (obj) => { obj.SetActive(true); }, (obj) => { obj.SetActive(false); }, (obj) => { Destroy(obj); }, false, 10, 10000);
+        enemyA = new GameObject[10];
+        enemyB = new GameObject[10];
+        enemyC = new GameObject[10];
+
+        itemA = new GameObject[10];
+        itemB = new GameObject[10];
+        itemC = new GameObject[10];
+        itemD = new GameObject[10];
+
+        npcA = new GameObject[10];
+        npcB = new GameObject[10];
+
+        playerBullet1 = new GameObject[50];
+        playerBullet2 = new GameObject[50];
+        playerBullet3 = new GameObject[50];
+        enemyBullet = new GameObject[20];
+        bossBullet = new GameObject[10];
+
+        bomA = new GameObject[30];
+        bomB = new GameObject[30];
+        bomC = new GameObject[30];
+
+        Generate();
+    }
+    void Generate()
+    {
+        //Àû
+        for (int i = 0; i < enemyA.Length; i++)
+        {
+            enemyA[i] = Instantiate(enemyAPrefab);
+            enemyA[i].SetActive(false);
+        }
+        for (int i = 0; i < enemyB.Length; i++)
+        {
+            enemyB[i] = Instantiate(enemyBPrefab);
+            enemyB[i].SetActive(false);
+        }
+        for (int i = 0; i < enemyC.Length; i++)
+        {
+            enemyC[i] = Instantiate(enemyCPrefab);
+            enemyC[i].SetActive(false);
+        }
+        //¾ÆÀÌÅÛ
+        for (int i = 0; i < itemA.Length; i++)
+        {
+            itemA[i] = Instantiate(itemAPrefab);
+            itemA[i].SetActive(false);
+        }
+        for (int i = 0; i < itemB.Length; i++)
+        {
+            itemB[i] = Instantiate(itemBPrefab);
+            itemB[i].SetActive(false);
+        }
+        for (int i = 0; i < itemC.Length; i++)
+        {
+            itemC[i] = Instantiate(itemCPrefab);
+            itemC[i].SetActive(false);
+        }
+        for (int i = 0; i < itemD.Length; i++)
+        {
+            itemD[i] = Instantiate(itemDPrefab);
+            itemD[i].SetActive(false);
+        }
+        //NPC
+        for (int i = 0; i < npcA.Length; i++)
+        {
+            npcA[i] = Instantiate(npcAPrefab);
+            npcA[i].SetActive(false);
+        }
+        for (int i = 0; i < npcB.Length; i++)
+        {
+            npcB[i] = Instantiate(npcBPrefab);
+            npcB[i].SetActive(false);
+        }
+        //ÃÑ¾Ë
+        for (int i = 0; i < playerBullet1.Length; i++)
+        {
+            playerBullet1[i] = Instantiate(playerBullet1Prefab);
+            playerBullet1[i].SetActive(false);
+        }
+        for (int i = 0; i < playerBullet2.Length; i++)
+        {
+            playerBullet2[i] = Instantiate(playerBullet2Prefab);
+            playerBullet2[i].SetActive(false);
+        }
+        for (int i = 0; i < playerBullet3.Length; i++)
+        {
+            playerBullet3[i] = Instantiate(playerBullet3Prefab);
+            playerBullet3[i].SetActive(false);
+        }
+        for (int i = 0; i < enemyBullet.Length; i++)
+        {
+            enemyBullet[i] = Instantiate(enemyBulletPrefab);
+            enemyBullet[i].SetActive(false);
+        }
+        for (int i = 0; i < bossBullet.Length; i++)
+        {
+            bossBullet[i] = Instantiate(bossBulletPrefab);
+            bossBullet[i].SetActive(false);
+        }
+        //ÀÌÆåÆ®
+        for (int i = 0; i < bomA.Length; i++)
+        {
+            bomA[i] = Instantiate(bomAPrefab);
+            bomA[i].SetActive(false);
+        }
+        for (int i = 0; i < bomB.Length; i++)
+        {
+            bomB[i] = Instantiate(bomBPrefab);
+            bomB[i].SetActive(false);
+        }
+        for (int i = 0; i < bomC.Length; i++)
+        {
+            bomC[i] = Instantiate(bomCPrefab);
+            bomC[i].SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject MakeObj(string type)
     {
-        time += Time.deltaTime;
-        if (enemyCount>=10)
-        {
 
-            if (b.bossClear==false)
-            {
-                Boss.SetActive(true);
-            }
-            
-            isBoss = true;
-        }
-        if (isBoss == false)
+        switch (type)
         {
-            if (time >= 3)
-            {
-                s = Random.Range(0, 8);
-                p = Random.Range(0, 5);
-                switch (s)
-                {
-                    case 0:
-                        var i = enemy0.Get();
-                        i.transform.position = prefabs[p].transform.position;
-                        time = 0;
-                        break;
-                    case 1:
-                        var j = enemy1.Get();
-                        j.transform.position = prefabs[p].transform.position;
-                        time = 0;
-                        break;
-                    case 2:
-                        var n = enemy2.Get();
-                        n.transform.position = prefabs[p].transform.position;
-                        time = 0;
-                        break;
-                    case 3:
-                        var a = enemy3.Get();
-                        a.transform.position = prefabs[p].transform.position;
-                        time = 0;
-                        break;
-                    case 4:
-                        var b = enemy4.Get();
-                        b.transform.position = prefabs[p].transform.position;
-                        time = 0;
-                        break;
-                    case 5:
-                        var c = enemy0.Get();
-                        c.transform.position = prefabs[p].transform.position;
-                        time = 0;
-                        break;
-                    case 6:
-                        var d = enemy1.Get();
-                        d.transform.position = prefabs[p].transform.position;
-                        time = 0;
-                        break;
-                    case 7:
-                        var e = enemy2.Get();
-                        e.transform.position = prefabs[p].transform.position;
-                        time = 0;
-                        break;
-                    case 8:
-                        var f = enemy4.Get();
-                        f.transform.position = prefabs[p].transform.position;
-                        time = 0;
-                        break;
-                }
-
-            }
+            case "enemyA":
+                targetPool = enemyA;
+                break;
+            case "enemyB":
+                targetPool = enemyB;
+                break;
+            case "enemyC":
+                targetPool = enemyC;
+                break;
+            case "itemA":
+                targetPool = itemA;
+                break;
+            case "itemB":
+                targetPool = itemB;
+                break;
+            case "itemC":
+                targetPool = itemC;
+                break;
+            case "itemD":
+                targetPool = itemD;
+                break;
+            case "npcA":
+                targetPool = npcA;
+                break;
+            case "npcB":
+                targetPool = npcB;
+                break;
+            case "playerBullet1":
+                targetPool = playerBullet1;
+                break;
+            case "playerBullet2":
+                targetPool = playerBullet2;
+                break;
+            case "playerBullet3":
+                targetPool = playerBullet3;
+                break;
+            case "enemyBullet":
+                targetPool = enemyBullet;
+                break;
+            case "bossBullet":
+                targetPool = bossBullet;
+                break;
+            case "bomA":
+                targetPool = bomA;
+                break;
+            case "bomB":
+                targetPool = bomB;
+                break;
+            case "bomC":
+                targetPool = bomC;
+                break;
         }
+        for (int i = 0; i < targetPool.Length; i++)
+        {
+            if (!targetPool[i].activeSelf)
+            {
+                targetPool[i].SetActive(true);
+                return targetPool[i];
+            }
+
+        }
+        return null;
     }
 }
+
+
+    

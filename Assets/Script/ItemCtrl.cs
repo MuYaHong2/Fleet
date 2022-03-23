@@ -37,20 +37,6 @@ public class ItemCtrl : MonoBehaviour
     }
     void Release()
     {
-        switch (n)
-        {
-            case "Invincibility(Clone)":
-                NGenerator.Item0.Release(gameObject);
-                break;
-            case "Painkiller(Clone)":
-                NGenerator.Item1.Release(gameObject);
-                break;
-            case "Power Up(Clone)":
-                NGenerator.Item2.Release(gameObject);
-                break;
-            case "Heal(Clone)":
-                NGenerator.Item3.Release(gameObject);
-                break;
-        }
+        gameObject.SetActive(false);
     }
 }

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2285861728382745851}
   - component: {fileID: 4998841236931402052}
   - component: {fileID: 3861181525071134819}
-  - component: {fileID: 3858671681193595991}
   m_Layer: 0
   m_Name: rbc
   m_TagString: Npc
@@ -147,21 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058e1914bcb8c6f4e808f0c3c2c14b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gauge: {fileID: 0}
+  score: {fileID: 0}
+  generator: {fileID: 0}
   speed: 2
   hp: 5
   health: 0
---- !u!114 &3858671681193595991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2361679705744156212}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3cc3571ab9d9d4f82ee73b56b732c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  hp: 5
-  health: 0
+  itemObjs: []

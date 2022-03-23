@@ -21,16 +21,15 @@ public class EnemyBullet : MonoBehaviour
     {
         if (transform.position.y <= -6)
         {
-            Generator.EnemyBullet.Release(gameObject);
+            Release();
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name=="Player")
-        {
-            var i = BoomG.boom1.Get();
-            i.transform.position = transform.position;
-            Generator.EnemyBullet.Release(gameObject);
-        }
+        
+    }
+    void Release()
+    {
+        gameObject.SetActive(false);
     }
 }

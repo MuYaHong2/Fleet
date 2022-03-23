@@ -11,7 +11,7 @@ public class Hit : MonoBehaviour
     }
     public void p()
     {
-        BoomG.boom1.Release(gameObject);
+        gameObject.SetActive(false);
     }
     // Update is called once per frame
 

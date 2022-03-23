@@ -72,7 +72,6 @@ public class PlayerCtrl : MonoBehaviour
         Vector3 nextPosY = Vector3.up * updown * Time.deltaTime;
         Vector3 nextPosX = Vector3.right * side * Time.deltaTime;
         transform.position = curPos + nextPosX + nextPosY;
-        //transform.position += new Vector3(side, updown, 0)* Time.deltaTime;
         anim.SetFloat("Side",hInput);
         if (health<=0)
         {

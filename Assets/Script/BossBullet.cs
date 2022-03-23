@@ -5,10 +5,11 @@ using UnityEngine;
 public class BossBullet : MonoBehaviour
 {
     public int speed;
+    public Generator generator;
     // Start is called before the first frame update
     void Start()
     {
-        
+        generator = FindObjectOfType<Generator>();
     }
 
     // Update is called once per frame
@@ -17,9 +18,7 @@ public class BossBullet : MonoBehaviour
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         if (transform.position.y <= -6)
         {
-
-            Generator.BossBullet.Release(gameObject);
-
+            gameObject.SetActive(false);
         }
        
     }
@@ -27,9 +26,9 @@ public class BossBullet : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            var i = BoomG.boom1.Get();
-            i.transform.position = transform.position;
-            Generator.BossBullet.Release(gameObject);
+            GameObject boom = generator.MakeObj("bomB");
+            boom.transform.position = transform.position;
+            gameObject.SetActive(false);    
         }
     }
 }

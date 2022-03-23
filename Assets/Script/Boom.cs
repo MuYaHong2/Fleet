@@ -5,17 +5,12 @@ using UnityEngine;
 public class Boom : MonoBehaviour
 {
 
-
-    float pt;
     // Start is called before the first frame update
-    void OnEnable()
-    {
-        pt = 0;
-    }
+
 
     public void r()
     {
-        BoomG.boom.Release(gameObject);
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
