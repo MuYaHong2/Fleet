@@ -63,7 +63,10 @@ public class EnemyCtrl0 : MonoBehaviour
             Release();
             gauge.pain += 1;
         }
-        
+        if (gameManager.stopG==true)
+        {
+            Release();
+        }
     }
     void Release()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BossCtrl : MonoBehaviour
 {
     public int health;
@@ -9,8 +10,10 @@ public class BossCtrl : MonoBehaviour
     public GameObject director;
     public GameObject[] sponPoint;
     public Generator gener;
+    public Gamemanager gameManager;
     public int stage;
-    public bool clear;
+
+    int healthPoint;
     Score score;
     // Start is called before the first frame update
     void Start()
@@ -18,11 +21,15 @@ public class BossCtrl : MonoBehaviour
         gameObject.SetActive(false);
         score = director.GetComponent<Score>();
     }
+    void OnEnable()
+    {
+        healthPoint = health;
+    }
 
     // Update is called once per frame
     void Update()
     {
-
+       
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,14 +41,25 @@ public class BossCtrl : MonoBehaviour
     }
     void OnHit(int dmg)
     {
-        health -= dmg;
-        if (health <= 0)
+        healthPoint -= dmg;
+        if (healthPoint <= 0)
         {
             GameObject boom = gener.MakeObj("bomC");
             boom.transform.position = transform.position;
             gameObject.SetActive(false);
             bossClear = true;
+            if (gameManager.stage1==true)
+            {
+                gameManager.stage1 = false;
+                gameManager.count = 0;
+                gameManager.stage2 = true;
+                gameManager.stopG = true;
+                gameManager.isBoss = false;
+            }
+            else if (gameManager.stage1==false)
+            {
+                gameManager.and();
+            }   
         }
-           
     }
 }

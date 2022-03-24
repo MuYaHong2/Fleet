@@ -182,7 +182,13 @@ MonoBehaviour:
   boss: {fileID: 2089871017}
   count: 0
   isBoss: 0
+  stage1: 0
+  stage2: 0
+  clear: 0
+  stopG: 0
+  scoreSave: 0
   generator: {fileID: 203880212}
+  score: {fileID: 1124104466}
 --- !u!1 &143091437
 GameObject:
   m_ObjectHideFlags: 0
@@ -3502,8 +3508,8 @@ MonoBehaviour:
   director: {fileID: 1124104465}
   sponPoint: []
   gener: {fileID: 203880212}
+  gameManager: {fileID: 56457191}
   stage: 0
-  clear: 0
 --- !u!70 &2089871022
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
