@@ -49,9 +49,10 @@ public class PlayerCtrl : MonoBehaviour
         }
         var t=transform.position;
         var hInput = Input.GetAxisRaw("Horizontal");
+        //var vInput = Input.GetAxisRaw("Vertical");
         if (Input.GetKey(KeyCode.A))
         {
-            side -= speed * 0.7f * Time.deltaTime;
+           side -= speed * 0.7f * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D))
         {
