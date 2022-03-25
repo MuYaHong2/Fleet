@@ -3,96 +3,75 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class Gamemanager : MonoBehaviour
 {
-    public string[] enemyObjs;
-    public string[] npcObjs;
-    public string[] itemObjs;
-    public GameObject[] spawnPoint;
-    public GameObject boss;
-    public int count;
-    public bool isBoss;
-    public bool stage1;
-    public bool stage2;
-    public bool clear;
-    public bool stopG;
+    public Gamemanager() { }
+
+    private static Gamemanager instance;
+    public static Gamemanager Instance
+    {
+        get
+        {
+            if (instance==null)
+            {
+                instance = new GameObject().AddComponent<Gamemanager>();
+                if (instance==null)
+                {
+                    Debug.Log("¾øÀ½");
+                }
+            }
+            return instance;
+        }
+    }
+    
+
+
     public int scoreSave;
+
+    public int score1;
+    public int score2;
+    public int score3;
+    public int score4;
+    public int score5;
     public int[] lank;
-
-    float i;
-    float j;
-    float time;
-    float sTime;
+    public int count;
 
 
-
-    public Generator generator;
     public Score score;
     // Start is called before the first frame update
     void Start()
     {
-        enemyObjs = new string[] { "enemyA", "enemyB", "enemyC" };
-        npcObjs = new string[] { "npcA", "npcB", };
-        itemObjs = new string[] { "itemA", "itemB", "itemC", "itemD" };
+        
 
-        isBoss = false;
-        stage1 = true;
-        stage2 = false;
+        
+        score = FindObjectOfType<Score>();
+        count = 0;
+    }
+    void Awake()
+    {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != null)
+        {
+            Debug.Log("destroy");
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        j += Time.deltaTime;
-        time += Time.deltaTime;
-        i += Time.deltaTime;
-        if (stage2 == true)
-        {
-            sTime += Time.deltaTime;
-        }
-        if (stopG == true)
-        {
-            sTime += Time.deltaTime;
-            if (sTime >= 5)
-            {
-                stopG = false;
-            }
-        }
-        if (scene.name == "play")
-        {
-            if (stopG == false)
-            {
-                if (j >= 4)
-                {
-                    SpawnNpc();
-                    j = 0;
-                }
-                if (isBoss == false)
-                {
-                    if (i >= 3)
-                    {
-                        SpawnEnemy();
-                        i = 0;
-                    }
-                }
-                if (count >= 1)
-                {
-                    boss.SetActive(true);
-                    isBoss = true;
-                }
-                if (time >= 6)
-                {
-                    SpawnItem();
-                    time = 0;
-                }
-            }
-        }
+        lank = new int[] {score1, score2, score3, score4, score5};
 
 
 
     }
-    void SpawnEnemy()
+    /*void SpawnEnemy()
     {
         int ranEnemy = Random.Range(0, 3);
         int ranPoint = Random.Range(0, 5);
@@ -115,19 +94,46 @@ public class Gamemanager : MonoBehaviour
         int ranPoint2 = Random.Range(0, 5);
         GameObject item = generator.MakeObj(itemObjs[ranItem]);
         item.transform.position = transform.position;
-    }
+    }*/
 
-    public void and()
+    public void And()
     {
         scoreSave = score.scorePoint;
+        count = 0;
         Debug.Log(scoreSave);
-        for (int s = 0; s < lank.Length; s++)
-        {
-            if (scoreSave > lank[s])
+
+            if (scoreSave>score1)
             {
-                lank[s] = scoreSave;
+                score5 = score4;
+                score4 = score3;
+                score3 = score2;
+                score2 = score1;
+                score1 = scoreSave;
             }
-        }
+            else if (scoreSave > score2)
+            {
+                score5 = score4;
+                score4 = score3;
+                score3 = score2;
+                score2 = scoreSave;
+            }
+            else if (scoreSave > score3)
+            {
+                score5 = score4;
+                score4 = score3;
+                score3 = scoreSave;
+            }
+            else if (scoreSave > score4)
+            {
+                score5 = score4;
+                score4 = scoreSave;
+            }
+            else if (scoreSave > score5)
+            {
+                score5 = scoreSave;
+            }
+        
+
         SceneManager.LoadScene("GameOver");
     }
 }

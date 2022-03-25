@@ -7,10 +7,10 @@ public class EnemyCtrl0 : MonoBehaviour
     public float speed;
     public int hp;
     public int health;
-    string n;
     public Gauge gauge;
     public Score score;
     public Gamemanager gameManager;
+    public Generating generating;
     public Generator generator;
     int scorePoint0;
 
@@ -20,11 +20,12 @@ public class EnemyCtrl0 : MonoBehaviour
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        n = gameObject.name;
         gauge = FindObjectOfType<Gauge>();
         score = FindObjectOfType<Score>();
-        gameManager = FindObjectOfType<Gamemanager>();
+        //gameManager = FindObjectOfType<Gamemanager>();
         generator = FindObjectOfType<Generator>();
+        generating = FindObjectOfType<Generating>();
+        gameManager = FindObjectOfType<Gamemanager>();
     }
     void OnEnable()
     {
@@ -63,7 +64,7 @@ public class EnemyCtrl0 : MonoBehaviour
             Release();
             gauge.pain += 1;
         }
-        if (gameManager.stopG==true)
+        if (generating.stopG==true)
         {
             Release();
         }

@@ -9,6 +9,7 @@ public class PlayerCtrl : MonoBehaviour
     public Animator anim;
     public int health;
     public GameObject shield;
+    public Gamemanager gamemanager;
     int maxHealth;
     Gauge pain;
     Shot shot;
@@ -74,7 +75,7 @@ public class PlayerCtrl : MonoBehaviour
         anim.SetFloat("Side",hInput);
         if (health<=0)
         {
-            SceneManager.LoadScene("GameOver");
+            Gamemanager.Instance.And();
         }
         
     

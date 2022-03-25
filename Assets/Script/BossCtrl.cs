@@ -11,6 +11,7 @@ public class BossCtrl : MonoBehaviour
     public GameObject[] sponPoint;
     public Generator gener;
     public Gamemanager gameManager;
+    public Generating generating;
     public int stage;
 
     int healthPoint;
@@ -20,6 +21,7 @@ public class BossCtrl : MonoBehaviour
     {
         gameObject.SetActive(false);
         score = director.GetComponent<Score>();
+        gameManager = FindObjectOfType<Gamemanager>();
     }
     void OnEnable()
     {
@@ -27,10 +29,7 @@ public class BossCtrl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-       
-    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag=="PlayerBullet")
@@ -44,21 +43,23 @@ public class BossCtrl : MonoBehaviour
         healthPoint -= dmg;
         if (healthPoint <= 0)
         {
+            score.scorePoint += 10000;
             GameObject boom = gener.MakeObj("bomC");
             boom.transform.position = transform.position;
             gameObject.SetActive(false);
             bossClear = true;
-            if (gameManager.stage1==true)
+            if (generating.stage1==true)
             {
-                gameManager.stage1 = false;
-                gameManager.count = 0;
-                gameManager.stage2 = true;
-                gameManager.stopG = true;
-                gameManager.isBoss = false;
+                generating. stage1 = false;
+                Gamemanager.Instance.count = 0;
+                generating.stage2 = true;
+                generating.stopG = true;
+                generating.isBoss = false;
             }
-            else if (gameManager.stage1==false)
+            else if (generating.stage1==false)
             {
-                gameManager.and();
+                Gamemanager.Instance.count = 0;
+                gameManager.And();
             }   
         }
     }
