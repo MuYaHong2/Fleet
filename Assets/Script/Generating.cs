@@ -20,6 +20,7 @@ public class Generating : MonoBehaviour
     public bool clear;
     public bool stopG;
 
+    public int count;
 
     float i;
     float j;
@@ -48,17 +49,16 @@ public class Generating : MonoBehaviour
         {
             sTime += Time.deltaTime;
         }
-        if (stopG == true)
+        /*if (stopG == true)
         {
             sTime += Time.deltaTime;
             if (sTime >= 5)
             {
                 stopG = false;
             }
-        }
+        }*/
 
-        if (stopG == false)
-        {
+        
             if (j >= 4)
             {
                 SpawnNpc();
@@ -72,7 +72,7 @@ public class Generating : MonoBehaviour
                     i = 0;
                 }
             }
-            if (gamemanager.count >= 10)
+            if (count >= 10)
             {
                 boss.SetActive(true);
                 isBoss = true;
@@ -86,7 +86,7 @@ public class Generating : MonoBehaviour
                 SpawnItem();
                 time = 0;
             }
-        }
+        
 
 
     }
@@ -113,5 +113,11 @@ public class Generating : MonoBehaviour
         int ranPoint2 = Random.Range(0, 5);
         GameObject item = generator.MakeObj(itemObjs[ranItem]);
         item.transform.position = spawnPoint[ranPoint2].transform.position;
+    }
+    public IEnumerator Fade1()
+    {
+        yield return new WaitForSeconds(2);
+        yield return null;
+        
     }
 }

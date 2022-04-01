@@ -12,15 +12,16 @@ public class BossCtrl : MonoBehaviour
     public Generator gener;
     public Gamemanager gameManager;
     public Generating generating;
-    public int stage;
 
+    public int stage;
+    int scorePoint;
     int healthPoint;
-    Score score;
+    public scoreCtrl score;
     // Start is called before the first frame update
     void Start()
     {
         gameObject.SetActive(false);
-        score = director.GetComponent<Score>();
+        score = director.GetComponent<scoreCtrl>();
         gameManager = FindObjectOfType<Gamemanager>();
     }
     void OnEnable()
@@ -51,14 +52,15 @@ public class BossCtrl : MonoBehaviour
             if (generating.stage1==true)
             {
                 generating. stage1 = false;
-                Gamemanager.Instance.count = 0;
+                generating.count = 0;
                 generating.stage2 = true;
-                generating.stopG = true;
+                generating.Fade1();
+                
                 generating.isBoss = false;
             }
             else if (generating.stage1==false)
             {
-                Gamemanager.Instance.count = 0;
+                generating.count = 0;
                 gameManager.And();
             }   
         }

@@ -7,7 +7,7 @@ public class NpcCtrl : MonoBehaviour
 {
     Rigidbody2D rigid;
     public Gauge gauge;
-    public Score score;
+    public scoreCtrl score;
     public Generator generator;
     public float speed;
     public static IObjectPool<GameObject>[] item; 
@@ -23,7 +23,7 @@ public class NpcCtrl : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         gauge = FindObjectOfType<Gauge>();
-        score = FindObjectOfType<Score>();
+        score = FindObjectOfType<scoreCtrl>();
         generator = FindObjectOfType<Generator>();
         n = gameObject.name;
     }

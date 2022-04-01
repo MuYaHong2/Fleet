@@ -8,7 +8,7 @@ public class EnemyCtrl0 : MonoBehaviour
     public int hp;
     public int health;
     public Gauge gauge;
-    public Score score;
+    public scoreCtrl scoreCtrl; 
     public Gamemanager gameManager;
     public Generating generating;
     public Generator generator;
@@ -21,7 +21,7 @@ public class EnemyCtrl0 : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         gauge = FindObjectOfType<Gauge>();
-        score = FindObjectOfType<Score>();
+        scoreCtrl = FindObjectOfType<scoreCtrl>();
         //gameManager = FindObjectOfType<Gamemanager>();
         generator = FindObjectOfType<Generator>();
         generating = FindObjectOfType<Generating>();
@@ -48,8 +48,8 @@ public class EnemyCtrl0 : MonoBehaviour
         {
             GameObject bome = generator.MakeObj("bomB");
             bome.transform.position = transform.position;
-            score.scorePoint += scorePoint0;
-            gameManager.count += 1;
+            scoreCtrl.scorePoint += scorePoint0;
+            generating.count += 1;
             Release();
         }
     }

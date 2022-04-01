@@ -8,38 +8,43 @@ public class scoreCtrl : MonoBehaviour
 {
     public GameObject score;
     public GameObject clear;
+    Gamemanager gameManager;
+
+    public int scorePoint;
+    public bool isClear;
+
     BossCtrl bossCtrl;
 
-    Score scoreA;
+    float t;
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<Gamemanager>();
         bossCtrl = FindObjectOfType<BossCtrl>();
-        scoreA = FindObjectOfType<Score>();
-        scoreA.scorePoint = 0;
+        scorePoint = 0;
         clear.SetActive(false);
-        scoreA.isClear = false;
+        isClear = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        gameManager.scoreSave = scorePoint;
         if (bossCtrl.bossClear == true)
         {
-            clear.SetActive(true);
-            bossCtrl.bossClear = false;
-            scoreA.isClear = true;
+
+            Fade();
         }
-        if (scoreA.isClear == true)
-        {
-            scoreA.t += Time.deltaTime;
-            if (scoreA.t >= 2)
-            {
-                clear.SetActive(false);
-                scoreA.isClear = false;
-                scoreA.t = 0;
-            }
-        }
-        score.GetComponent<Text>().text = scoreA.scorePoint.ToString();
+        
+        score.GetComponent<Text>().text = scorePoint.ToString();
+    }
+    IEnumerator Fade()
+    {
+        clear.SetActive(true);
+        bossCtrl.bossClear = false;
+        yield return new WaitForSeconds(2);
+        clear.SetActive(false);
+        yield return null;
+
     }
 }
