@@ -8,12 +8,14 @@ public class scoreCtrl : MonoBehaviour
 {
     public GameObject score;
     public GameObject clear;
+
     Gamemanager gameManager;
 
     public int scorePoint;
     public bool isClear;
 
     BossCtrl bossCtrl;
+    Text scorBord;
 
     float t;
     // Start is called before the first frame update
@@ -21,6 +23,7 @@ public class scoreCtrl : MonoBehaviour
     {
         gameManager = FindObjectOfType<Gamemanager>();
         bossCtrl = FindObjectOfType<BossCtrl>();
+        scorBord = score.GetComponent<Text>();
         scorePoint = 0;
         clear.SetActive(false);
         isClear = false;
@@ -36,7 +39,7 @@ public class scoreCtrl : MonoBehaviour
             Fade();
         }
         
-        score.GetComponent<Text>().text = scorePoint.ToString();
+        scorBord.text = scorePoint.ToString();
     }
     IEnumerator Fade()
     {

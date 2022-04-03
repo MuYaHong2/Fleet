@@ -2199,6 +2199,7 @@ MonoBehaviour:
   gamemanager: {fileID: 0}
   shootPoint: {fileID: 558942595}
   shootPoint1: {fileID: 1783042962}
+  scorectrl: {fileID: 1124104468}
   image: {fileID: 977707721}
 --- !u!212 &1129252817
 SpriteRenderer:
@@ -2303,10 +2304,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9feca4ef7b96cc84ea7c5fb40d5011ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootPoint: {fileID: 558942595}
-  shootPoint1: {fileID: 1783042962}
-  generator: {fileID: 203880212}
-  bulletLevel: 2
 --- !u!61 &1129252821
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3498,6 +3495,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   generating: {fileID: 1167916564}
   stage: 0
+  score: {fileID: 0}
 --- !u!70 &2089871022
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

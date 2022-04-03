@@ -14,6 +14,7 @@ public class PlayerCtrl : MonoBehaviour
     public Gamemanager gamemanager;
     public GameObject shootPoint;
     public GameObject shootPoint1;
+    public scoreCtrl scorectrl;
     float maxHealth;
     GameObject bullet;
     Gauge pain;
@@ -111,6 +112,7 @@ public class PlayerCtrl : MonoBehaviour
         anim.SetFloat("Side", hInput);
         if (health <= 0)
         {
+            gamemanager.scoreSave = scorectrl.scorePoint;
             gamemanager.And();
         }
         image.fillAmount = health / maxHealth;
